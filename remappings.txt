@@ -1,2 +1,4 @@
 ds-test/=lib/forge-std/lib/ds-test/src/
 forge-std/=lib/forge-std/src/
+std-func/=lib/ucs-ops/src/
+devkit/=lib/ucs-ops/utils/
