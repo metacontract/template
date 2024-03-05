@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {StorageSchema} from "../storages/StorageSchema.sol";
+import {StorageRef} from "../storages/StorageRef.sol";
 
 contract SetNumber {
     function setNumber(uint256 newNumber) public {
-        StorageSchema.$Counter().number = newNumber;
+        StorageRef.Counter().number = newNumber;
     }
 }
