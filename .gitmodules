@@ -4,3 +4,6 @@
 [submodule "lib/forge-std"]
 	path = lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "lib/erc7201"]
+	path = lib/erc7201
+	url = https://github.com/metacontract/erc7201
