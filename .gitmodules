@@ -4,3 +4,6 @@
 [submodule "lib/erc7201"]
 	path = lib/erc7201
 	url = https://github.com/kaihiroi/erc7201
+[submodule "lib/mc"]
+	path = lib/mc
+	url = https://github.com/metacontract/mc
