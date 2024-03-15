@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "bundle/counter/functions/Increment.sol";
-import "bundle/counter/functions/Initialize.sol";
-import "bundle/counter/functions/SetNumber.sol";
-import "bundle/counter/interfaces/CounterFacade.sol";
-import "mc/devkit/MCDevKit.sol";
-
-import "forge-std/console.sol";
+import {Increment} from "bundle/counter/functions/Increment.sol";
+import {Initialize} from "bundle/counter/functions/Initialize.sol";
+import {SetNumber} from "bundle/counter/functions/SetNumber.sol";
+import {CounterFacade} from "bundle/counter/interfaces/CounterFacade.sol";
+import {MCDevKit} from "mc/devkit/MCDevKit.sol";
 
 library DeployLib {
     function bundleName() public returns(string memory) {

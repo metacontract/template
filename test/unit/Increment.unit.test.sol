@@ -9,7 +9,7 @@ import "mc/devkit/MCTest.sol";
 contract IncrementUnitTest is MCStateFuzzingTest {
     Increment increment;
 
-    function setUp() public override {
+    function setUp() public {
         increment = new Increment();
         setImplementation(increment.increment.selector, address(increment));
     }

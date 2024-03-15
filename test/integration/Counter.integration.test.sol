@@ -16,8 +16,8 @@ contract CounterIntegrationTest is MCTest {
     function setUp() public {
         vm.prank(address(this));
         mc.deployCounter();
-        
-        counter = ICounter(mc.findProxy(DeployLib.bundleName()).toAddress());
+
+        counter = ICounter(mc.findProxy(DeployLib.bundleName()).addr);
     }
 
     function test_Increment() public {

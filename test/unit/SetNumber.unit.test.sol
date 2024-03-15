@@ -9,7 +9,7 @@ import "mc/devkit/MCTest.sol";
 contract SetNumberUnitTest is MCStateFuzzingTest {
     SetNumber public setNumber;
 
-    function setUp() public override {
+    function setUp() public {
         setNumber = new SetNumber();
         setImplementation(setNumber.setNumber.selector, address(setNumber));
     }
