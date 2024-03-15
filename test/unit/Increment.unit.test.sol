@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
-import {Increment} from "../../src/functions/Increment.sol";
+import {Increment} from "bundle/counter/functions/Increment.sol";
 
 contract IncrementUnitTest is Test {
     // Counter public counter;

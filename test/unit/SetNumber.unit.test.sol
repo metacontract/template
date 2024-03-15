@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Test, console} from "forge-std/Test.sol";
-import {SetNumber} from "../../src/functions/SetNumber.sol";
+import {SetNumber} from "bundle/counter/functions/SetNumber.sol";
 
 contract SetNumberUnitTest is Test {
     // Counter public counter;
