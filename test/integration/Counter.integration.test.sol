@@ -1,23 +1,32 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Test, console} from "forge-std/Test.sol";
+import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
+import "mc/devkit/MCDevKit.sol";
+import "mc/devkit/MCTest.sol";
+import "script/DeployLib.sol";
 
-contract CounterIntegrationTest is Test {
-    // Counter public counter;
 
-    // function setUp() public {
-    //     counter = new Counter();
-    //     counter.setNumber(0);
-    // }
+import "forge-std/console.sol";
 
-    // function test_Increment() public {
-    //     counter.increment();
-    //     assertEq(counter.number(), 1);
-    // }
+contract CounterIntegrationTest is MCTest {
+    using DeployLib for MCDevKit;
+    ICounter public counter;
 
-    // function testFuzz_SetNumber(uint256 x) public {
-    //     counter.setNumber(x);
-    //     assertEq(counter.number(), x);
-    // }
+    function setUp() public {
+        vm.prank(address(this));
+        mc.deployCounter();
+        
+        counter = ICounter(mc.findProxy(DeployLib.bundleName()).toAddress());
+    }
+
+    function test_Increment() public {
+        counter.increment();
+        assertEq(counter.Counter().number, 1);
+    }
+
+    function testFuzz_SetNumber(uint256 x) public {
+        counter.setNumber(x);
+        assertEq(counter.Counter().number, x);
+    }
 }

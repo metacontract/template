@@ -1,19 +1,23 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Test, console} from "forge-std/Test.sol";
 import {Increment} from "bundle/counter/functions/Increment.sol";
+import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
+import {StorageRef} from "bundle/counter/storages/StorageRef.sol";
+import "mc/devkit/MCTest.sol";
 
-contract IncrementUnitTest is Test {
-    // Counter public counter;
+contract IncrementUnitTest is MCStateFuzzingTest {
+    Increment increment;
 
-    // function setUp() public {
-    //     counter = new Counter();
-    //     counter.setNumber(0);
-    // }
+    function setUp() public override {
+        increment = new Increment();
+        setImplementation(increment.increment.selector, address(increment));
+    }
 
-    // function test_Increment() public {
-    //     counter.increment();
-    //     assertEq(counter.number(), 1);
-    // }
+    function test_Increment() public {
+        uint befNumber = StorageRef.Counter().number;
+        ICounter(address(this)).increment();
+        uint aftNumber = StorageRef.Counter().number;
+        assertEq(aftNumber - befNumber, 1);
+    }
 }
