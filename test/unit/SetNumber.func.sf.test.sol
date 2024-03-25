@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import {MCStateFuzzingTest} from "mc/devkit/MCTest.sol";
 import {SetNumber} from "bundle/counter/functions/SetNumber.sol";
-import {StorageRef} from "bundle/counter/storages/StorageRef.sol";
+import {Storage} from "bundle/counter/storage/Storage.sol";
 
 contract SetNumberFunctionStateFuzzingTest is MCStateFuzzingTest {
     SetNumber immutable counter = SetNumber(address(this));
@@ -14,6 +14,6 @@ contract SetNumberFunctionStateFuzzingTest is MCStateFuzzingTest {
 
     function testFuzz_Success_setNumber(uint256 fuzzNumber) public {
         counter.setNumber(fuzzNumber);
-        assertEq(StorageRef.Counter().number, fuzzNumber);
+        assertEq(Storage.Counter().number, fuzzNumber);
     }
 }

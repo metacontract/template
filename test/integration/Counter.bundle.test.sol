@@ -5,16 +5,21 @@ import {MCTest} from "mc/devkit/MCTest.sol";
 import {stdError} from "forge-std/StdError.sol";
 import {DeployLib} from "../../script/DeployLib.sol";
 import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
-import {StorageRef} from "bundle/counter/storages/StorageRef.sol";
+import {Storage} from "bundle/counter/storage/Storage.sol";
 import {StorageGetter} from "../utils/StorageGetter.sol";
 import {MCDevKit} from "mc/devkit/MCDevKit.sol";
+import {Schema} from "bundle/counter/storage/Schema.sol";
+
+interface ICounterTest is ICounter {
+    function Counter() external pure returns(Schema.$Counter memory);
+}
 
 contract CounterBundleTest is MCTest {
     using DeployLib for MCDevKit;
-    ICounter public counter;
+    ICounterTest public counter;
 
     function setUp() public {
-        counter = ICounter(mc.deployCounter(0).toProxyAddress());
+        counter = ICounterTest(mc.deployCounter(0).toProxyAddress());
         mc.setStorageGetter(StorageGetter.Counter.selector, address(new StorageGetter()));
     }
 

@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import {MCStateFuzzingTest} from "mc/devkit/MCTest.sol";
 import {Increment} from "bundle/counter/functions/Increment.sol";
-import {StorageRef} from "bundle/counter/storages/StorageRef.sol";
+import {Storage} from "bundle/counter/storage/Storage.sol";
 
 contract IncrementFunctionStateFuzzingTest is MCStateFuzzingTest {
     Increment immutable counter = Increment(address(this));
@@ -14,8 +14,8 @@ contract IncrementFunctionStateFuzzingTest is MCStateFuzzingTest {
 
     function testFuzz_Success_increment(uint256 fuzzNumber) public {
         vm.assume(fuzzNumber != type(uint256).max);
-        StorageRef.Counter().number = fuzzNumber;
+        Storage.Counter().number = fuzzNumber;
         counter.increment();
-        assertEq(StorageRef.Counter().number, fuzzNumber + 1);
+        assertEq(Storage.Counter().number, fuzzNumber + 1);
     }
 }

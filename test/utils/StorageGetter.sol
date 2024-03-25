@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {StorageSchema} from "../../src/counter/storages/StorageSchema.sol";
-import {StorageRef} from "../../src/counter/storages/StorageRef.sol";
+import {Schema} from "../../src/counter/storage/Schema.sol";
+import {Storage} from "../../src/counter/storage/Storage.sol";
 
 contract StorageGetter {
-    function Counter() public pure returns(StorageSchema.$Counter memory) {
-        return StorageRef.Counter();
+    function Counter() public pure returns(Schema.$Counter memory) {
+        return Storage.Counter();
     }
 }
