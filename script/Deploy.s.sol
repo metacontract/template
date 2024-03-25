@@ -11,7 +11,7 @@ contract DeployScript is MCScript {
     function run() public {
         vm.startBroadcast();
 
-        mc.deployCounter();
+        mc.deployCounter(1);
 
         vm.stopBroadcast();
 
