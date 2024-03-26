@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {Schema, COUNTER_LOCATION} from "./Schema.sol";
+import {Schema} from "./Schema.sol";
 
 library Storage {
-    function Counter() internal pure returns(Schema.$Counter storage ref) {
-        assembly { ref.slot := COUNTER_LOCATION }
+    function CounterState() internal pure returns(Schema.$CounterState storage ref) {
+        bytes32 slot = Schema.TEMPLATE_COUNTER_COUNTERSTATE;
+        assembly { ref.slot := slot }
     }
 }
