@@ -1,38 +1,37 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
+import {MCDevKit} from "mc/devkit/MCDevKit.sol";
 import {MCTest} from "mc/devkit/MCTest.sol";
 import {stdError} from "forge-std/StdError.sol";
+
 import {DeployLib} from "../../script/DeployLib.sol";
 import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
+
 import {Storage} from "bundle/counter/storage/Storage.sol";
-import {StorageGetter} from "../utils/StorageGetter.sol";
-import {MCDevKit} from "mc/devkit/MCDevKit.sol";
 import {Schema} from "bundle/counter/storage/Schema.sol";
+import {StorageReader} from "../utils/StorageReader.sol";
+import {ICounterTester} from "../utils/ICounterTester.sol";
 
-interface ICounterTest is ICounter {
-    function Counter() external pure returns(Schema.$Counter memory);
-}
-
-contract CounterBundleTest is MCTest {
+contract CounterTest is MCTest {
     using DeployLib for MCDevKit;
-    ICounterTest public counter;
+    ICounterTester public counter;
 
     function setUp() public {
-        counter = ICounterTest(mc.deployCounter(0).toProxyAddress());
-        mc.setStorageGetter(StorageGetter.Counter.selector, address(new StorageGetter()));
+        counter = ICounterTester(mc.deployCounter(0).toProxyAddress());
+        mc.setStorageGetter(StorageReader.CounterState.selector, address(new StorageReader()));
     }
 
     function test_Success_increment() public {
         counter.increment();
-        assertEq(counter.Counter().number, 1);
+        assertEq(counter.CounterState().number, 1);
     }
 
     function testFuzz_Success_increment(uint256 fuzzNumber) public {
         vm.assume(fuzzNumber != type(uint256).max);
         counter.setNumber(fuzzNumber);
         counter.increment();
-        assertEq(counter.Counter().number, fuzzNumber + 1);
+        assertEq(counter.CounterState().number, fuzzNumber + 1);
     }
 
     function test_Fail_increment() public {

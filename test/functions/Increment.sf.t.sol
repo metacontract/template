@@ -5,7 +5,7 @@ import {MCStateFuzzingTest} from "mc/devkit/MCTest.sol";
 import {Increment} from "bundle/counter/functions/Increment.sol";
 import {Storage} from "bundle/counter/storage/Storage.sol";
 
-contract IncrementFunctionStateFuzzingTest is MCStateFuzzingTest {
+contract IncrementStateFuzzingTest is MCStateFuzzingTest {
     Increment immutable counter = Increment(address(this));
 
     function setUp() public {
@@ -14,8 +14,8 @@ contract IncrementFunctionStateFuzzingTest is MCStateFuzzingTest {
 
     function testFuzz_Success_increment(uint256 fuzzNumber) public {
         vm.assume(fuzzNumber != type(uint256).max);
-        Storage.Counter().number = fuzzNumber;
+        Storage.CounterState().number = fuzzNumber;
         counter.increment();
-        assertEq(Storage.Counter().number, fuzzNumber + 1);
+        assertEq(Storage.CounterState().number, fuzzNumber + 1);
     }
 }

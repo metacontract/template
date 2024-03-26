@@ -5,7 +5,7 @@ import {MCStateFuzzingTest} from "mc/devkit/MCTest.sol";
 import {SetNumber} from "bundle/counter/functions/SetNumber.sol";
 import {Storage} from "bundle/counter/storage/Storage.sol";
 
-contract SetNumberFunctionStateFuzzingTest is MCStateFuzzingTest {
+contract SetNumberStateFuzzingTest is MCStateFuzzingTest {
     SetNumber immutable counter = SetNumber(address(this));
 
     function setUp() public {
@@ -14,6 +14,6 @@ contract SetNumberFunctionStateFuzzingTest is MCStateFuzzingTest {
 
     function testFuzz_Success_setNumber(uint256 fuzzNumber) public {
         counter.setNumber(fuzzNumber);
-        assertEq(Storage.Counter().number, fuzzNumber);
+        assertEq(Storage.CounterState().number, fuzzNumber);
     }
 }
