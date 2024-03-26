@@ -9,7 +9,7 @@ contract DeployScript is MCScript {
     using DeployLib for MCDevKit;
 
     function run() public {
-        vm.startBroadcast();
+        vm.startBroadcast(getPrivateKey("DEPLOYER_PRIV_KEY"));
 
         mc.deployCounter(1);
 
