@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {MCDevKit} from "mc/devkit/MCDevKit.sol";
-import {MCTest} from "mc/devkit/MCTest.sol";
+import {MCDevKit} from "@mc/devkit/MCDevKit.sol";
+import {MCTest} from "@mc/devkit/MCTest.sol";
 import {stdError} from "forge-std/StdError.sol";
 
 import {DeployLib} from "../../script/DeployLib.sol";

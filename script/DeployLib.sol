@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {MCDevKit} from "mc/devkit/MCDevKit.sol";
+import {MCDevKit} from "@mc/devkit/MCDevKit.sol";
 // Bundle interface
 import {CounterFacade} from "bundle/counter/interfaces/CounterFacade.sol";
 // Functions

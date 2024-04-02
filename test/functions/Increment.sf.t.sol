@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {MCStateFuzzingTest} from "mc/devkit/MCTest.sol";
+import {MCStateFuzzingTest} from "@mc/devkit/MCTest.sol";
 import {Increment} from "bundle/counter/functions/Increment.sol";
 import {Storage} from "bundle/counter/storage/Storage.sol";
 
