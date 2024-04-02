@@ -8,12 +8,7 @@ import {DeployLib} from "./DeployLib.sol";
 contract DeployScript is MCScript {
     using DeployLib for MCDevKit;
 
-    function run() public {
-        vm.startBroadcast(getPrivateKey("DEPLOYER_PRIV_KEY"));
-
+    function run() public startBroadcastWith("DEPLOYER_PRIV_KEY") {
         mc.deployCounter(1);
-
-        vm.stopBroadcast();
-
     }
 }
