@@ -19,7 +19,7 @@ contract CounterTest is MCTest {
 
     function setUp() public {
         counter = ICounterTester(mc.deployCounter(0).toProxyAddress());
-        mc.setStorageGetter(StorageReader.CounterState.selector, address(new StorageReader()));
+        mc.setStorageReader(StorageReader.CounterState.selector, address(new StorageReader()));
     }
 
     function test_Success_increment() public {
