@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-echo $(sh ./lib/erc7201/calc-storage-location.sh $1)
+forge script lib/mc/script/ERC7201Calc.s.sol:ERC7201Calc
