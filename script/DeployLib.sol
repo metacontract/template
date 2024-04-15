@@ -19,6 +19,7 @@ library DeployLib {
         mc.use("Increment", Increment.increment.selector, address(new Increment()));
         mc.use("SetNumber", SetNumber.setNumber.selector, address(new SetNumber()));
         mc.use("Initialize", Initialize.initialize.selector, address(new Initialize()));
+        mc.useFacade(address(new CounterFacade()));
         mc.deploy(abi.encodeCall(Initialize.initialize, initialNumber));
         return mc;
     }
