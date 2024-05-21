@@ -1,16 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {MCDevKit} from "@mc/devkit/MCDevKit.sol";
 import {MCTest} from "@mc/devkit/MCTest.sol";
+import {MCDevKit} from "@mc/devkit/MCDevKit.sol";
+import {DeployLib} from "../../script/DeployLib.sol";
 import {stdError} from "forge-std/StdError.sol";
 
-import {DeployLib} from "../../script/DeployLib.sol";
-import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
-
 import {Storage} from "bundle/counter/storage/Storage.sol";
-import {Schema} from "bundle/counter/storage/Schema.sol";
-import {StorageReader} from "../utils/StorageReader.sol";
+import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
 
 contract CounterIntegrationTest is MCTest {
     using DeployLib for MCDevKit;

@@ -1,43 +1,45 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import {MCDevKit} from "@mc/devkit/MCDevKit.sol";
 import {MCTest} from "@mc/devkit/MCTest.sol";
 import {stdError} from "forge-std/StdError.sol";
 
-import {DeployLib} from "../../script/DeployLib.sol";
-import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
-
 import {Storage} from "bundle/counter/storage/Storage.sol";
-import {Schema} from "bundle/counter/storage/Schema.sol";
-import {StorageReader} from "../utils/StorageReader.sol";
-import {ICounterTester} from "../utils/ICounterTester.sol";
+import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
+import {Initialize} from "bundle/counter/functions/protected/Initialize.sol";
+import {GetNumber} from "bundle/counter/functions/GetNumber.sol";
+import {Increment} from "bundle/counter/functions/Increment.sol";
+import {SetNumber} from "bundle/counter/functions/SetNumber.sol";
 
 contract CounterTest is MCTest {
-    using DeployLib for MCDevKit;
-    ICounterTester public counter;
+    ICounter public counter = ICounter(target);
 
     function setUp() public {
-        counter = ICounterTester(mc.deployCounter(0).toProxyAddress());
-        mc.setStorageReader(StorageReader.CounterState.selector, address(new StorageReader()));
+        _use(Initialize.initialize.selector, address(new Initialize()));
+        _use(GetNumber.getNumber.selector, address(new GetNumber()));
+        _use(Increment.increment.selector, address(new Increment()));
+        _use(SetNumber.setNumber.selector, address(new SetNumber()));
     }
 
-    function test_Success_increment() public {
-        counter.increment();
-        assertEq(counter.CounterState().number, 1);
-    }
+    function test_Success(uint256 fuzzInitialNumber, uint256 fuzzNumber) public {
+        counter.initialize(fuzzInitialNumber);
+        assertEq(Storage.CounterState().number, fuzzInitialNumber);
+        assertEq(counter.getNumber(), fuzzInitialNumber);
 
-    function testFuzz_Success_increment(uint256 fuzzNumber) public {
-        vm.assume(fuzzNumber != type(uint256).max);
         counter.setNumber(fuzzNumber);
+        assertEq(Storage.CounterState().number, fuzzNumber);
+        assertEq(counter.getNumber(), fuzzNumber);
+
+        vm.assume(fuzzNumber != type(uint256).max);
         counter.increment();
-        assertEq(counter.CounterState().number, fuzzNumber + 1);
+        assertEq(Storage.CounterState().number, fuzzNumber + 1);
     }
 
-    function test_Fail_increment() public {
-        counter.setNumber(type(uint256).max);
+    function test_increment_Revert_Overflow() public {
+        Storage.CounterState().number = type(uint256).max;
         vm.expectRevert(stdError.arithmeticError);
         counter.increment();
 
     }
+
 }
