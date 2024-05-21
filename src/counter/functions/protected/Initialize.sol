@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.23;
 
 import {ProtectionBase} from "./protection/ProtectionBase.sol";
 import {Storage} from "../../storage/Storage.sol";

@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.23;
 
 import {MCTest} from "@mc/devkit/MCTest.sol";
 import {stdError} from "forge-std/StdError.sol";

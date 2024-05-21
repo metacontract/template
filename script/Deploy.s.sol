@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.23;
 
 import {MCDevKit} from "@mc/devkit/MCDevKit.sol";
 import {MCScript} from "@mc/devkit/MCScript.sol";
