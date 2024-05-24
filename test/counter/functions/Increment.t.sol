@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import {MCTest} from "@mc/devkit/MCTest.sol";
+import {MCTest} from "@mc/devkit/Flattened.sol";
 import {Increment} from "bundle/counter/functions/Increment.sol";
 import {Storage} from "bundle/counter/storage/Storage.sol";
 
