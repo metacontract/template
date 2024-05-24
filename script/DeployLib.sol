@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import {MCDevKit} from "@mc/devkit/MCDevKit.sol";
+import {MCDevKit} from "@mc/devkit/Flattened.sol";
 // Bundle interface
 import {CounterFacade} from "bundle/counter/interfaces/CounterFacade.sol";
 // Functions
