@@ -6,7 +6,7 @@ import {stdError} from "forge-std/StdError.sol";
 
 import {Storage} from "bundle/counter/storage/Storage.sol";
 import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
-import {Initialize} from "bundle/counter/functions/protected/Initialize.sol";
+import {Initialize} from "bundle/counter/functions/initializer/Initialize.sol";
 import {GetNumber} from "bundle/counter/functions/GetNumber.sol";
 import {Increment} from "bundle/counter/functions/Increment.sol";
 import {SetNumber} from "bundle/counter/functions/SetNumber.sol";
@@ -21,21 +21,21 @@ contract CounterTest is MCTest {
         _use(SetNumber.setNumber.selector, address(new SetNumber()));
     }
 
-    function test_Success(uint256 fuzzInitialNumber, uint256 fuzzNumber) public {
-        counter.initialize(fuzzInitialNumber);
-        assertEq(Storage.CounterState().number, fuzzInitialNumber);
-        assertEq(counter.getNumber(), fuzzInitialNumber);
+    function testFuzz_setAndIncrementNumber_success(uint256 _initializeNumber, uint256 _number) public {
+        counter.initialize(_initializeNumber);
+        assertEq(Storage.CounterState().number, _initializeNumber);
+        assertEq(counter.getNumber(), _initializeNumber);
 
-        counter.setNumber(fuzzNumber);
-        assertEq(Storage.CounterState().number, fuzzNumber);
-        assertEq(counter.getNumber(), fuzzNumber);
+        counter.setNumber(_number);
+        assertEq(Storage.CounterState().number, _number);
+        assertEq(counter.getNumber(), _number);
 
-        vm.assume(fuzzNumber != type(uint256).max);
+        vm.assume(_number != type(uint256).max);
         counter.increment();
-        assertEq(Storage.CounterState().number, fuzzNumber + 1);
+        assertEq(Storage.CounterState().number, _number + 1);
     }
 
-    function test_increment_Revert_Overflow() public {
+    function test_increment_revert_overflow() public {
         Storage.CounterState().number = type(uint256).max;
         vm.expectRevert(stdError.arithmeticError);
         counter.increment();
