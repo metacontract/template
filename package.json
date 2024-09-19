@@ -1,0 +1,6 @@
+{
+	"name": "mc-template",
+	"scripts": {
+		"setup": "forge install && forge remappings > remappings.txt && echo 'bundle/=src/' >> remappings.txt"
+	}
+}
