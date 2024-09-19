@@ -1,6 +1,7 @@
 {
 	"name": "mc-template",
 	"scripts": {
-		"setup": "forge install && forge remappings > remappings.txt && echo 'bundle/=src/' >> remappings.txt"
+		"setup": "forge install && forge remappings > remappings.txt && echo 'bundle/=src/' >> remappings.txt",
+		"dry-deploy-local": "sh -c 'anvil & ANVIL_PID=$!; forge script DeployCounterScript --rpc-url http://127.0.0.1:8545 --broadcast; kill $ANVIL_PID'"
 	}
 }
