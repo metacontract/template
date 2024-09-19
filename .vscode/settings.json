@@ -1,5 +1,5 @@
 {
-  "solidity.packageDefaultDependenciesContractsDirectory": "src",
-  "solidity.packageDefaultDependenciesDirectory": "lib",
-  "solidity.monoRepoSupport": false
+	"solidity.packageDefaultDependenciesContractsDirectory": "src",
+	"solidity.packageDefaultDependenciesDirectory": "lib",
+	"solidity.monoRepoSupport": false
 }

@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import {MCTest, MCDevKit} from "@mc/devkit/Flattened.sol";
+import {MCTest, MCDevKit, stdError} from "@mc-devkit/Flattened.sol";
 import {DeployLib} from "../../script/DeployLib.sol";
-import {stdError} from "forge-std/StdError.sol";
 
 import {Storage} from "bundle/counter/storage/Storage.sol";
 import {ICounter} from "bundle/counter/interfaces/ICounter.sol";
